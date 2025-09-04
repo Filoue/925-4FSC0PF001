@@ -70,10 +70,7 @@ int main()
                 }
             }
         }
-        
-
-        
-    }while (true);
+    }while (playersInGame[playerNb - 1]);
         
 
 }
