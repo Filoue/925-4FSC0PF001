@@ -14,6 +14,8 @@ int main()
 {
     char exitOrNot = 'z';
 
+    int playerNb = 0;
+
     int scorePlayerOne = 0;
     int scorePlayerTwo = 0;
 
@@ -21,49 +23,57 @@ int main()
     bool playerTwo = true;
 
     int diceResult = 0;
+
+    std::cout << "How many players play?" << "\n";
+    std::cin >> playerNb;
+
+    for (int i = 0; i < playerNb; i++)
+    {
+        std::cout << i;
+    }
+
+    std::vector<int> players;
+    std::vector<bool> playersInGame;
+    
+    for (int i = 0; i < playerNb; i++)
+    {
+        players.push_back(0);
+        playersInGame.push_back(true);
+    }
     
     InitDice();
     do
     {
         // Condition de stop de la partie
         int diceResult = 0;
-        
-        if (playerOne)
+        for (int indexPlayer = 0; indexPlayer < playerNb; indexPlayer++)
         {
-           diceResult = Tirage();
-           std::cout << "playerOne play\n";
-           std::cout << "DICE = " << diceResult << "\n";
-           scorePlayerOne += diceResult;
-           playerOne = PlayerLose(diceResult, scorePlayerOne);
-           std::cout << "SCORE = " << scorePlayerOne << std::endl << "\n";
+            if (playersInGame.at(indexPlayer))
+            {
+                diceResult = Tirage();
 
-           std::cout << "Do you want to stop ? (o/n)" << "\n";
-           std::cin >> exitOrNot;
-           if (exitOrNot == 'o')
-           {
-               std::cout << "PlayerOne score : " << scorePlayerOne << "\n";
-               playerOne = false;
-           }
+                std::cout << "player" << indexPlayer << " play\n";
+                std::cout << "DICE = " << diceResult << "\n";
+
+                players.at(indexPlayer) += diceResult;
+                playersInGame.at(indexPlayer) = PlayerLose(diceResult, players.at(indexPlayer));
+
+                std::cout << "SCORE = " << players.at(indexPlayer) << std::endl << "\n";
+
+                std::cout << "Do you want to stop ? (o/n)" << "\n";
+                std::cin >> exitOrNot;
+
+                if (exitOrNot == 'o')
+                {
+                    std::cout << "Player" << indexPlayer << " score :" << players.at(indexPlayer) << "\n";
+                    playersInGame.at(indexPlayer) = false;
+                }
+            }
         }
         
-        if (playerTwo)
-        {
-           diceResult = Tirage();
-           std::cout << "playerTwo play\n";
-           std::cout << "DICE = " << diceResult << "\n";
-           scorePlayerTwo += diceResult;
-           playerTwo = PlayerLose(diceResult, scorePlayerTwo);
-           std::cout << "SCORE = " << scorePlayerTwo << std::endl << "\n";
 
-           std::cout << "Do you want to stop ? (o/n)" << "\n";
-           std::cin >> exitOrNot;
-           if (exitOrNot == 'o')
-           {
-               std::cout << "PlayerTwo score : " << scorePlayerTwo << "\n";
-               playerTwo = false;
-           }
-        }
         
-    }while (playerOne && playerTwo);
+    }while (true);
+        
 
 }
