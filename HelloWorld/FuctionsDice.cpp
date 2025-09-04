@@ -1,8 +1,8 @@
 #include <iostream>
 #include "FuctionsDice.h"
 
-int Tirage(int a)
+int Tirage()
 {
     std::srand(time(nullptr));
-    return a = 1 + rand() % 6;
+    return 1 + rand() % 6;
 }

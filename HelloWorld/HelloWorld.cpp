@@ -22,34 +22,38 @@ int main()
 
     do
     {
-        diceResult = Tirage(diceResult);
-        // Condition de stop de la partie
-        std::cout << "DICE = " << diceResult << "\n";
-
-        if (diceResult == 1)
+        while (playerOne == true)
         {
-            scorePlayerOne = 0;
-            playerOne = false;
+            diceResult = Tirage();
+            // Condition de stop de la partie
+            std::cout << "DICE = " << diceResult << "\n";
+
+            if (diceResult == 1)
+            {
+                scorePlayerOne = 0;
+                playerOne = false;
+            }
+            else
+            {
+                scorePlayerOne += diceResult;
+
+            }
+
+            if (scorePlayerOne > 20 || diceResult == 1) {
+                // la lose
+                scorePlayerOne = 0;
+                std::cout << "Game over !!!!!!!!!!!!!" << "\n";
+                playerOne = false;
+                // C'est fini
+                break;
+            }
+            std::cout << "SCORE = " << scorePlayerOne << std::endl << "\n";
+
+
+            std::cout << "Do you want to stop ? (y/n)" << "\n";
+            std::cin >> exitOrNot;
         }
-        else
-        {
-            scorePlayerOne += diceResult;
-
-        }
-
-        if (scorePlayerOne > 20 || diceResult == 1) {
-            // la lose
-            scorePlayerOne = 0;
-            std::cout << "Game over !!!!!!!!!!!!!" << "\n";
-            playerOne = false;
-            // C'est fini
-            break;
-        }
-        std::cout << "SCORE = " << scorePlayerOne << std::endl << "\n";
-
-
-        std::cout << "Do you want to stop ? (y/n)" << "\n";
-        std::cin >> exitOrNot;
+        
 
 
     }while (exitOrNot != 'y');
