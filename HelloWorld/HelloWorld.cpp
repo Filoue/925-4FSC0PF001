@@ -4,57 +4,53 @@
 #include <iostream>
 #include <vector>
 
+#include "FuctionsDice.h"
+
 
 int main()
 {
     char exitOrNot = 'n';
 
-    int playerNb;
-    std::vector<int> players;
-    // Combien de joueur joue?
-    std::cout << "How many players play?";
-    std::cin >> playerNb;
+    int scorePlayerOne = 0;
+    int scorePlayerTwo = 0;
 
-    for (int i = 0; i < playerNb; i++)
-    {
-        players.insert(players.begin() + i, 0);
-    }
+    bool playerOne = true;
+    bool playerTwo = true;
 
-    std::cout << players.size();
+    int diceResult = 0;
+    
 
     do
     {
-        for (int i = 0; i < players.size(); i++)
+        diceResult = Tirage(diceResult);
+        // Condition de stop de la partie
+        std::cout << "DICE = " << diceResult << "\n";
+
+        if (diceResult == 1)
         {
-            srand(time(nullptr));
-            int diceResult = 1 + rand() % 6;
-            std::cout << "player" << players[i] << " is playing\n";
-            std::cout << "Dice = " << diceResult << std::endl;
-            // Affichage du score
-            players[i] += diceResult;
-            std::cout << "SCORE = " << players[i] << std::endl;
-
-
-            // Condition de stop de la partie
-            if (diceResult == 1) {
-                // la lose
-                players[i] = 0;
-                std::cout << players[i] << "Game over !!!!!!!!!!!!!" << std::endl;
-                // C'est fini
-                players.erase(players.begin() + i);
-            }
-
-            if (players[i] >= 20) {
-                // la win
-                std::cout << "You Win !!!!!!!!!!!" << std::endl;
-                // C'est fini
-                break;
-            }
-        
-
-            std::cout << "Do you want to exit ?" << std::endl;
-            std::cin >> exitOrNot;
+            scorePlayerOne = 0;
+            playerOne = false;
         }
+        else
+        {
+            scorePlayerOne += diceResult;
+
+        }
+
+        if (scorePlayerOne > 20 || diceResult == 1) {
+            // la lose
+            scorePlayerOne = 0;
+            std::cout << "Game over !!!!!!!!!!!!!" << "\n";
+            playerOne = false;
+            // C'est fini
+            break;
+        }
+        std::cout << "SCORE = " << scorePlayerOne << std::endl << "\n";
+
+
+        std::cout << "Do you want to stop ? (y/n)" << "\n";
+        std::cin >> exitOrNot;
+
 
     }while (exitOrNot != 'y');
 

@@ -1,8 +1,8 @@
+#include <iostream>
 #include "FuctionsDice.h"
 
-int compute(int a, int b) 
+int Tirage(int a)
 {
-	if (a > 20) {
-		return 0;
-	}
+    std::srand(time(nullptr));
+    return a = 1 + rand() % 6;
 }
