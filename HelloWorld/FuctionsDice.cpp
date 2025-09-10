@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+
 #include "FuctionsDice.h"
 
 void InitDice() 
@@ -22,9 +24,19 @@ bool PlayerLose(int diceResult, int scorePlayer)
         // C'est fini
         return false;
     }
+
     if (scorePlayer > 20) 
     {
         return false;
     }
     return true;
+}
+
+bool CheckPlayersContinue(std::vector<bool> playersInGame)
+{
+    for (bool continu : playersInGame)
+    {
+        return true;
+    }
+    return false
 }

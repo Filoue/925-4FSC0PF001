@@ -5,3 +5,5 @@ int Tirage();
 
 bool PlayerLose(int, int);
 
+bool CheckPlayersContinue(std::vector<bool>);
+
